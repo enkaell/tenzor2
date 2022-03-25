@@ -7,12 +7,14 @@ public class Card {
 
     Card(int rank, String suit)
     {
-        this.rank = rank;
+        this.suit = suit;
         String [] data = {"diamonds","clubs", "hearts", "spades"};
         if (Arrays.asList(data).contains(suit)==false)
             System.out.println("Wrong suit value");
         if (this.rank>maxRank)
             maxRank = this.rank;
+        else
+            this.rank = rank;
     }
     Card(String suit)
     {
@@ -48,10 +50,18 @@ public class Card {
         }
         return rank;
     }
+    public boolean equals(Card firstCard, Card secondCard){
+        return firstCard.rank == secondCard.rank && firstCard.suit == secondCard.suit;
+    }
+    public int hashcode(Card card){
+
+    }
     public static void main(String[] args) {
         Card card = new Card (10,"diamonds");
         Card card1 = new Card("clubs");
+
         System.out.println(card.getRank());
         System.out.println(card1.getRank());
+        System.out.println(card.equals(card,card));
     }
 }
