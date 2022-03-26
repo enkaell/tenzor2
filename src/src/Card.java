@@ -1,4 +1,6 @@
+package src;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Card {
     private int rank;
@@ -28,7 +30,8 @@ public class Card {
         return suit;
     }
 
-    public String ToString() {
+    @Override
+    public String toString() {
         String [] data = {"Jack", "Queen", "King", "Ace", "Joker"};
         String rank = Integer.toString(getRank());
         switch (rank) {
@@ -50,18 +53,25 @@ public class Card {
         }
         return rank;
     }
-    public boolean equals(Card firstCard, Card secondCard){
-        return firstCard.rank == secondCard.rank && firstCard.suit == secondCard.suit;
+    public boolean equals(Card card){
+        return this.rank == card.rank && this.suit == card.suit;
     }
-    public int hashcode(Card card){
-
+    @Override
+    public int hashCode(){
+        return Objects.hash(this.rank, this.suit);
     }
-    public static void main(String[] args) {
-        Card card = new Card (10,"diamonds");
-        Card card1 = new Card("clubs");
-
-        System.out.println(card.getRank());
-        System.out.println(card1.getRank());
-        System.out.println(card.equals(card,card));
+    public boolean isStandart(){
+        return !(this.rank < 6) && !(this.rank > 14);
+    }
+    public int isGreater(Card card) {
+        return Integer.compare(this.rank, card.rank);
+    }
+    public int cardEquals(Card card){
+        String [] data = {"clubs", "diamonds", "spades", "hearts"};
+        return Arrays.asList(data).indexOf(this.suit)-Arrays.asList(data).indexOf(card.suit);
+    }
+    public static int cardEquals(Card card1, Card card2){
+        String [] data = {"clubs", "diamonds", "spades", "hearts"};
+        return Arrays.asList(data).indexOf(card1.suit)-Arrays.asList(data).indexOf(card2.suit);
     }
 }
