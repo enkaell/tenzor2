@@ -1,4 +1,5 @@
 package src;
+import java.util.*;
 
 public class main {
     public static void main(String[] args) {
@@ -10,6 +11,23 @@ public class main {
         System.out.println(card.equals(card));
         System.out.println(card.hashCode());
         System.out.println(card.cardEquals(card1));
+
+        Deck deck = Deck.CreateDeck(true);
+        ArrayList<Card> pulledCards = new ArrayList<>();
+
+        for (int i = 0; i < 18; i++) {
+            pulledCards.add(deck.takeCard());
+        }
+
+        int indexToDeck = new Random().nextInt(pulledCards.size());
+        Card cardToDeck = pulledCards.get(indexToDeck);
+        pulledCards.remove(indexToDeck);
+
+        deck.returnToDeck(cardToDeck);
+        System.out.println(deck.toString());
+
+        deck.shakeDeck();
+        System.out.println(deck.toString());
 
     }
 }
