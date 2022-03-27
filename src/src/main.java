@@ -29,5 +29,15 @@ public class main {
         deck.shakeDeck();
         System.out.println(deck.toString());
 
+
+        Folder root = new Folder("root");
+        File gameWoW = new File("WoW","exe", root);
+        Folder games = new Folder("games", root, gameWoW);
+        File gameCS = new File("CS","exe", games);
+
+        System.out.println(games.returnChilds());
+        System.out.println(gameWoW.path);
+        System.out.println(gameWoW.returnParent());
+        System.out.println(gameCS.path);
     }
 }
