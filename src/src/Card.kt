@@ -1,77 +1,66 @@
-package src;
-import java.util.Arrays;
-import java.util.Objects;
+package src
 
-public class Card {
-    private int rank;
-    private String suit;
-    public static int maxRank;
+import java.util.Arrays
+import java.util.Objects
 
-    Card(int rank, String suit)
-    {
-        this.suit = suit;
-        String [] data = {"diamonds","clubs", "hearts", "spades"};
-        if (Arrays.asList(data).contains(suit)==false)
-            System.out.println("Wrong suit value");
-        if (this.rank>maxRank)
-            maxRank = this.rank;
-        else
-            this.rank = rank;
+class Card {
+    var rank = 0
+        private set
+    var suit: String
+        private set
+
+    internal constructor(rank: Int, suit: String) {
+        this.suit = suit
+        val data = arrayOf("diamonds", "clubs", "hearts", "spades")
+        if (Arrays.asList(data).contains(suit) === false) System.out.println("Wrong suit value")
+        if (this.rank > maxRank) maxRank = this.rank else this.rank = rank
     }
-    Card(String suit)
-    {
-        this.suit = suit;
-        this.rank = maxRank+1;
-    }
-    public int getRank() {
-        return rank;
-    }
-    public String getSuit() {
-        return suit;
+
+    internal constructor(suit: String) {
+        this.suit = suit
+        rank = maxRank + 1
     }
 
     @Override
-    public String toString() {
-        String [] data = {"Jack", "Queen", "King", "Ace", "Joker"};
-        String rank = Integer.toString(getRank());
-        switch (rank) {
-            case "10":
-                rank = data[0];
-                break;
-            case "11":
-                rank = data[1];
-                break;
-            case "12":
-                rank = data[2];
-                break;
-            case "13":
-                rank = data[3];
-                break;
-            case "14":
-                rank = data[4];
-                break;
+    override fun toString(): String {
+        val data = arrayOf("Jack", "Queen", "King", "Ace", "Joker")
+        var rank: String = Integer.toString(rank)
+        when (rank) {
+            "10" -> rank = data[0]
+            "11" -> rank = data[1]
+            "12" -> rank = data[2]
+            "13" -> rank = data[3]
+            "14" -> rank = data[4]
         }
-        return rank;
+        return rank
     }
-    public boolean equals(Card card){
-        return this.rank == card.rank && this.suit == card.suit;
+
+    fun equals(card: Card): Boolean {
+        return rank == card.rank && suit === card.suit
     }
+
     @Override
-    public int hashCode(){
-        return Objects.hash(this.rank, this.suit);
+    override fun hashCode(): Int {
+        return Objects.hash(rank, suit)
     }
-    public boolean isStandart(){
-        return !(this.rank < 6) && !(this.rank > 14);
+
+    val isStandart: Boolean
+        get() = rank >= 6 && rank <= 14
+
+    fun isGreater(card: Card): Int {
+        return Integer.compare(rank, card.rank)
     }
-    public int isGreater(Card card) {
-        return Integer.compare(this.rank, card.rank);
+
+    fun cardEquals(card: Card): Int {
+        val data = arrayOf("clubs", "diamonds", "spades", "hearts")
+        return Arrays.asList(data).indexOf(suit) - Arrays.asList(data).indexOf(card.suit)
     }
-    public int cardEquals(Card card){
-        String [] data = {"clubs", "diamonds", "spades", "hearts"};
-        return Arrays.asList(data).indexOf(this.suit)-Arrays.asList(data).indexOf(card.suit);
-    }
-    public static int cardEquals(Card card1, Card card2){
-        String [] data = {"clubs", "diamonds", "spades", "hearts"};
-        return Arrays.asList(data).indexOf(card1.suit)-Arrays.asList(data).indexOf(card2.suit);
+
+    companion object {
+        var maxRank = 0
+        fun cardEquals(card1: Card, card2: Card): Int {
+            val data = arrayOf("clubs", "diamonds", "spades", "hearts")
+            return Arrays.asList(data).indexOf(card1.suit) - Arrays.asList(data).indexOf(card2.suit)
+        }
     }
 }

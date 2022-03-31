@@ -1,21 +1,21 @@
-package src;
+package src
 
-public class AbstractFileSystemNode implements FileSystemNode{
-    public String name;
-    public String path;
+class AbstractFileSystemNode : FileSystemNode {
+    var name: String? = null
+    var path: String? = null
 
     @Override
-    public final String returnParent(){
-        return super.toString();
+    override fun returnParent(): String {
+        return super.toString()
     }
+
     @Override
-    public String returnName()
-    {
-        return this.name;
-    };
+    override fun returnName(): String? {
+        return name
+    }
+
     @Override
-    public final String returnPath()
-    {
-        return this.path;
+    override fun returnPath(): String? {
+        return path
     }
 }

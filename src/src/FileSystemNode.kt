@@ -1,7 +1,7 @@
-package src;
+package src
 
-interface FileSystemNode {
-    String returnParent();
-    String returnName();
-    String returnPath();
+internal interface FileSystemNode {
+    fun returnParent(): String?
+    fun returnName(): String?
+    fun returnPath(): String?
 }

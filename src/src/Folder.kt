@@ -1,24 +1,24 @@
-package src;
+package src
 
-public class Folder extends AbstractFileSystemNode{
-    public String childs="";
-    static String rootpath;
-    Folder(String name, AbstractFileSystemNode... files) {
-        this.name = name;
-        if (files.length==0) {
-            this.rootpath = this.name;
-            this.path = "/" + name;
-        }
-        else
-            this.path = "/"+rootpath+"/"+name;
-        for (int i = 0; i < files.length; i++){
-            this.childs+=" "+files[i].name;
-            if (files[i] instanceof Folder)
-                files[i].path = this.path+files[i].path;
-        }
-
+class Folder internal constructor(name: String, vararg files: AbstractFileSystemNode) : AbstractFileSystemNode() {
+    var childs = ""
+    fun returnChilds(): String {
+        return childs
     }
-    public String returnChilds(){
-        return this.childs;
+
+    companion object {
+        var rootpath: String? = null
+    }
+
+    init {
+        name = name
+        if (files.size == 0) {
+            rootpath = name
+            this.path = "/$name"
+        } else this.path = "/" + rootpath + "/" + name
+        for (i in 0 until files.size) {
+            childs += " " + files[i].name
+            if (files[i] is Folder) files[i].path = this.path + files[i].path
+        }
     }
 }

@@ -1,13 +1,14 @@
-package src;
+package src
 
-public class File extends AbstractFileSystemNode {
-    public String exp;
-    File(String name, String exp, AbstractFileSystemNode folder){
-        this.name = name;
-        this.exp = exp;
-        this.path = folder.path+"/"+name+"."+exp;
+class File internal constructor(name: String, exp: String, folder: AbstractFileSystemNode) : AbstractFileSystemNode() {
+    var exp: String
+    fun returnExp(): String {
+        return exp
     }
-    public String returnExp(){
-        return exp;
+
+    init {
+        name = name
+        this.exp = exp
+        this.path = folder.path.toString() + "/" + name + "." + exp
     }
 }
