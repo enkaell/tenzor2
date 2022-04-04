@@ -1,6 +1,6 @@
 package src
 
-class AbstractFileSystemNode : FileSystemNode {
+open class AbstractFileSystemNode : FileSystemNode {
     var name: String? = null
     var path: String? = null
 
